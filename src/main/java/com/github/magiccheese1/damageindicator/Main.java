@@ -3,7 +3,8 @@ package com.github.magiccheese1.damageindicator;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.magiccheese1.damageindicator.EntityHider.Policy;
+import com.github.magiccheese1.damageindicator.Utils.EntityHider.Policy;
+import com.github.magiccheese1.damageindicator.Utils.EntityHider;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -17,15 +18,13 @@ public class Main extends JavaPlugin {
   public void onEnable() {
     // Save the default config from src/resources/config.yml
     this.saveDefaultConfig();
-    // Get current config
-    FileConfiguration config = this.getConfig();
 
     entityHider = new EntityHider(this, Policy.BLACKLIST);
 
     toBeRemovedArmorstands = new ArrayList<>();
 
     getServer().getPluginManager()
-        .registerEvents(new DamageIndicatorListener(this, entityHider, config, toBeRemovedArmorstands), this);
+        .registerEvents(new DamageIndicatorListener(this, entityHider, toBeRemovedArmorstands), this);
   }
 
   @Override

@@ -1,5 +1,7 @@
 package com.github.magiccheese1.damageindicator;
 
+import com.github.magiccheese1.damageindicator.Utils.EntityHider;
+
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -20,12 +22,12 @@ public class InvisibleArmorStand implements Consumer<ArmorStand> {
 
   @Override
   public void accept(ArmorStand as) {
-    if(showToDamagerOnly) {
-    plugin.getServer().getOnlinePlayers().forEach(p -> {
-      if (p != damager)
-        entityHider.toggleEntity(p, as);
-    });
-  }
+    if (showToDamagerOnly) {
+      plugin.getServer().getOnlinePlayers().forEach(p -> {
+        if (p != damager)
+          entityHider.toggleEntity(p, as);
+      });
+    }
     as.setVisible(false);
     as.setInvulnerable(true);
     as.setSmall(true);
@@ -35,4 +37,3 @@ public class InvisibleArmorStand implements Consumer<ArmorStand> {
     as.setMarker(true);
   }
 }
-
